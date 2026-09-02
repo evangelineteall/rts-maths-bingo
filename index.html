@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RTS Maths Bingo</title>
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <img src="img/rts-logo.png" alt="Ralph Thoresby School crest" class="header-logo" />
+    <h1>RTS Maths Bingo</h1>
+  </header>
+
+  <!-- ============================= SETUP SCREEN ============================= -->
+  <main id="screen-setup" class="screen">
+    <section class="instructions">
+      <h2>How this works</h2>
+      <p>
+        Each student draws their own grid on a whiteboard and fills it with any numbers
+        they like from <strong>0 to 100</strong>. Pick <strong>one</strong> topic to review below, then
+        press <strong>Start game</strong>. The site will call out a maths question at a time —
+        students work it out and cross off the matching number if it's on their board.
+        A live 0–100 grid on the caller screen shows every number called so far, so you can
+        check students' boards at a glance.
+      </p>
+    </section>
+
+    <section class="controls-row">
+      <input type="text" id="topic-search" placeholder="Search topics… (e.g. 'percentage', 'trig')" />
+      <div class="controls-buttons">
+        <button type="button" id="select-none-btn" class="btn btn-secondary">Clear selection</button>
+      </div>
+    </section>
+
+    <section id="topic-picker" class="topic-picker"></section>
+
+    <section class="start-row">
+      <div id="selection-summary" class="selection-summary">No topic selected yet.</div>
+      <button type="button" id="start-game-btn" class="btn btn-primary" disabled>Start game</button>
+    </section>
+  </main>
+
+  <!-- ============================= CALLER SCREEN ============================= -->
+  <main id="screen-caller" class="screen" hidden>
+    <div class="caller-layout">
+      <section class="caller-main">
+        <div class="progress-line">
+          <span id="progress-text">Question 1 of 1</span>
+          <button type="button" id="end-game-btn" class="btn btn-link">End game</button>
+        </div>
+
+        <div id="question-card" class="question-card">
+          <p id="question-text">Loading…</p>
+        </div>
+
+        <div id="reveal-area" class="reveal-area" hidden>
+          <span class="reveal-label">Answer:</span>
+          <span id="reveal-number" class="reveal-number">–</span>
+        </div>
+
+        <div class="caller-buttons">
+          <button type="button" id="reveal-btn" class="btn btn-primary btn-large">Reveal number</button>
+          <button type="button" id="next-btn" class="btn btn-primary btn-large" hidden>Next question →</button>
+          <button type="button" id="skip-btn" class="btn btn-secondary">Skip this question</button>
+        </div>
+      </section>
+
+      <aside class="caller-sidebar">
+        <h3>Numbers called <span id="called-count">(0)</span></h3>
+        <div id="number-grid" class="number-grid"></div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ============================= SUMMARY SCREEN ============================= -->
+  <main id="screen-summary" class="screen" hidden>
+    <h2>Game summary</h2>
+    <p id="summary-line"></p>
+    <div id="summary-grid" class="number-grid summary-grid"></div>
+    <p class="summary-list-label">Called, in order:</p>
+    <p id="summary-list" class="summary-list"></p>
+    <div class="summary-buttons">
+      <button type="button" id="play-again-btn" class="btn btn-primary">Play again (same topic)</button>
+      <button type="button" id="new-game-btn" class="btn btn-secondary">Choose a new topic</button>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>Ralph Thoresby School · "Ambition and Achievement for All"</p>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/curriculum.js"></script>
+  <script src="js/generators.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
