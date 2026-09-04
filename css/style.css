@@ -95,28 +95,66 @@ main.screen {
 .controls-buttons { display: flex; gap: 0.5rem; }
 
 .topic-picker {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
 }
 
-.year-group {
-  grid-column: 1 / -1;
-  margin-top: 0.5rem;
+.year-section {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(20, 20, 26, 0.05);
 }
-.year-group h2 {
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+
+.year-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  background: none;
+  border: none;
+  border-bottom: 4px solid var(--primary);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+}
+.year-toggle:hover { background: var(--primary-soft); }
+.year-toggle-label {
+  font-size: 1.05rem;
   font-weight: 800;
   color: var(--primary);
-  margin: 1.25rem 0 0.5rem;
-  border-bottom: 3px solid var(--gold);
-  display: inline-block;
-  padding: 0 0.1rem 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
-.year-group:first-of-type h2 { margin-top: 0; }
+.year-toggle-count {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+.year-toggle-chevron {
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--primary);
+  transition: transform 0.2s ease;
+}
+.year-section.open .year-toggle { border-bottom-color: var(--gold); }
+.year-section.open .year-toggle-chevron { transform: rotate(180deg); }
+
+.year-topics {
+  display: none;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0.9rem;
+  padding: 0 1.1rem 1.1rem;
+}
+.year-section.open .year-topics { display: grid; }
+
+.year-section.no-match { display: none; }
 
 .topic-card {
   background: var(--panel);

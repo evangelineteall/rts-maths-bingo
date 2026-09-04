@@ -61,12 +61,28 @@
     for (const year of YEAR_ORDER) {
       const entries = byYear[year];
       if (!entries) continue;
-      const yearGroup = document.createElement("div");
-      yearGroup.className = "year-group";
-      const h2 = document.createElement("h2");
-      h2.textContent = year;
-      yearGroup.appendChild(h2);
-      topicPickerEl.appendChild(yearGroup);
+
+      const topicCount = entries.reduce((sum, e) => sum + e.subtopics.length, 0);
+
+      const section = document.createElement("div");
+      section.className = "year-section";
+
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "year-toggle";
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.innerHTML = `<span class="year-toggle-label">${escapeHtml(year)}</span><span class="year-toggle-count">${topicCount} topic${topicCount === 1 ? "" : "s"}</span><span class="year-toggle-chevron" aria-hidden="true">&#9662;</span>`;
+      toggle.addEventListener("click", () => {
+        const isOpen = section.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+      });
+      section.appendChild(toggle);
+
+      const topicsEl = document.createElement("div");
+      topicsEl.className = "year-topics";
+      section.appendChild(topicsEl);
+
+      topicPickerEl.appendChild(section);
 
       for (const entry of entries) {
         const card = document.createElement("div");
@@ -87,7 +103,7 @@
           ul.appendChild(li);
         }
         card.appendChild(ul);
-        topicPickerEl.appendChild(card);
+        topicsEl.appendChild(card);
 
         ul.addEventListener("change", (e) => {
           if (e.target.matches("input[type=radio]")) {
@@ -124,8 +140,23 @@
 
   topicSearchEl.addEventListener("input", () => {
     const q = topicSearchEl.value.trim().toLowerCase();
-    document.querySelectorAll(".topic-card").forEach((card) => {
-      card.classList.toggle("hidden-by-search", q.length > 0 && !card.dataset.searchText.includes(q));
+    const searching = q.length > 0;
+    document.querySelectorAll(".year-section").forEach((section) => {
+      let anyVisible = false;
+      section.querySelectorAll(".topic-card").forEach((card) => {
+        const matches = !searching || card.dataset.searchText.includes(q);
+        card.classList.toggle("hidden-by-search", !matches);
+        if (matches) anyVisible = true;
+      });
+      section.classList.toggle("no-match", searching && !anyVisible);
+      if (searching) {
+        section.classList.toggle("open", anyVisible);
+        section.querySelector(".year-toggle").setAttribute("aria-expanded", String(anyVisible));
+      } else {
+        // Search cleared: collapse everything back down to keep the page tidy.
+        section.classList.remove("open");
+        section.querySelector(".year-toggle").setAttribute("aria-expanded", "false");
+      }
     });
   });
 
