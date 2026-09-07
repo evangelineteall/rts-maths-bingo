@@ -2930,6 +2930,168 @@
       const [p, q, r] = choice(CIRCLE_TRIPLES);
       return { q: `The point (${p}, ${q}) lies on the circle with equation x² + y² = r². What is the value of r?`, a: r };
     },
+
+  // ---------- Transition group (accessible / foundation-level) ----------
+  T101() {
+      const whole = randInt(1, 50);
+      if (choice(["tenths", "hundredths"]) === "tenths") {
+        const d = randInt(1, 9);
+        return { q: `What digit is in the tenths place of ${whole}.${d}?`, a: d };
+      }
+      const d1 = randInt(0, 9), d2 = randInt(1, 9);
+      return { q: `What digit is in the hundredths place of ${whole}.${d1}${d2}?`, a: d2 };
+    },
+  T102() {
+      const a = randInt(1, 60), b = randInt(1, 40);
+      const sum = a + b;
+      if (sum > 100) throw 0;
+      return { q: `${a} + ${b} = ?`, a: sum };
+    },
+  T103() {
+      const a = randInt(10, 100), b = randInt(1, a);
+      return { q: `${a} - ${b} = ?`, a: a - b };
+    },
+  T104() {
+      const decPart = randInt(1, 9), bWhole = randInt(1, 20);
+      const b = bWhole + decPart / 10;
+      const resultInt = randInt(1, 100 - bWhole);
+      const a = b + resultInt;
+      return { q: `${a.toFixed(1)} - ${b.toFixed(1)} = ?`, a: resultInt };
+    },
+  T105() {
+      const type = choice(["intTimes10", "decTimes10", "intDiv10", "bigDiv10"]);
+      if (type === "intTimes10") { const n = randInt(1, 10); return { q: `${n} × 10 = ?`, a: n * 10 }; }
+      if (type === "decTimes10") { const tenths = randInt(10, 99); return { q: `${(tenths / 10).toFixed(1)} × 10 = ?`, a: tenths }; }
+      if (type === "intDiv10") { const m = randInt(1, 10); return { q: `${m * 10} ÷ 10 = ?`, a: m }; }
+      const m = randInt(10, 99);
+      return { q: `${m * 10} ÷ 10 = ?`, a: m };
+    },
+  T106() {
+      if (choice(["mult", "div"]) === "mult") {
+        const a = randInt(2, 10), b = randInt(2, 10);
+        const p = a * b;
+        if (p > 100) throw 0;
+        return { q: `${a} × ${b} = ?`, a: p };
+      }
+      const b = randInt(2, 10), ans = randInt(2, 10);
+      return { q: `${b * ans} ÷ ${b} = ?`, a: ans };
+    },
+  T107() {
+      if (choice(["mult", "div"]) === "mult") {
+        const k = randInt(1, 50) * 2;
+        return { q: `${k} × 0.5 = ?`, a: k / 2 };
+      }
+      const ans = randInt(1, 50) * 2;
+      return { q: `${ans / 2} ÷ 0.5 = ?`, a: ans };
+    },
+  T108() {
+      const start = randInt(-10, 20);
+      const change = randInt(1, 25);
+      const rising = choice([true, false]);
+      const end = rising ? start + change : start - change;
+      if (end < 0 || end > 100) throw 0;
+      return { q: `The temperature is ${start}°C. It ${rising ? "rises" : "falls"} by ${change}°C. What is the new temperature, in °C?`, a: end };
+    },
+  T109() {
+      if (choice(["mult", "div"]) === "mult") {
+        const a = randInt(2, 9), b = randInt(2, 9);
+        const p = a * b;
+        if (p > 100) throw 0;
+        return { q: `-${a} × -${b} = ?`, a: p };
+      }
+      const b = randInt(2, 9), ans = randInt(2, 10);
+      return { q: `-${b * ans} ÷ -${b} = ?`, a: ans };
+    },
+  T110() {
+      if (choice(["noBrackets", "brackets"]) === "noBrackets") {
+        const a = randInt(1, 10), b = randInt(1, 10), c = randInt(1, 10);
+        const ans = a + b * c;
+        if (ans > 100) throw 0;
+        return { q: `${a} + ${b} × ${c} = ?`, a: ans };
+      }
+      const a = randInt(1, 10), b = randInt(1, 10), c = randInt(1, 5);
+      const ans = (a + b) * c;
+      if (ans > 100) throw 0;
+      return { q: `(${a} + ${b}) × ${c} = ?`, a: ans };
+    },
+  T111() {
+      if (choice(["total", "change"]) === "total") {
+        const price = randInt(1, 20), qty = randInt(2, 5);
+        const ans = price * qty;
+        if (ans > 100) throw 0;
+        return { q: `One notebook costs £${price}. How much do ${qty} notebooks cost, in £?`, a: ans };
+      }
+      const cost = randInt(1, 19), paid = choice([10, 20]);
+      if (paid <= cost) throw 0;
+      return { q: `An item costs £${cost}. You pay with a £${paid} note. How much change do you get, in £?`, a: paid - cost };
+    },
+  T112() {
+      const steps = choice([1, 2]);
+      const input = randInt(1, 10);
+      let value = input;
+      const parts = [];
+      for (let i = 0; i < steps; i++) {
+        const op = choice(["+", "×"]);
+        const n = op === "+" ? randInt(1, 10) : randInt(2, 5);
+        value = op === "+" ? value + n : value * n;
+        parts.push(`${op} ${n}`);
+      }
+      if (value > 100) throw 0;
+      return { q: `A function machine: input → ${parts.join(" → ")} → output. If the input is ${input}, what is the output?`, a: value };
+    },
+  T113() {
+      const op = choice(["+", "-", "×"]);
+      if (op === "+") { const x = randInt(1, 50), b = randInt(1, 50); const sum = x + b; if (sum > 100) throw 0; return { q: `x + ${b} = ${sum}. What is x?`, a: x }; }
+      if (op === "-") { const x = randInt(1, 80), b = randInt(1, x); return { q: `x - ${b} = ${x - b}. What is x?`, a: x }; }
+      const m = randInt(2, 10), x = randInt(1, 10);
+      const prod = m * x;
+      if (prod > 100) throw 0;
+      return { q: `${m}x = ${prod}. What is x?`, a: x };
+    },
+  T114() {
+      const num = randInt(1, 9), den = randInt(num + 1, 10);
+      const part = choice(["numerator", "denominator"]);
+      return { q: `In the fraction ${num}/${den}, what is the ${part}?`, a: part === "numerator" ? num : den };
+    },
+  T115() {
+      const den = randInt(4, 12);
+      if (choice(["add", "sub"]) === "add") {
+        const a = randInt(1, den - 2), b = randInt(1, den - 1 - a);
+        return { q: `${a}/${den} + ${b}/${den} = ?/${den}. What number replaces the ?`, a: a + b };
+      }
+      const a = randInt(2, den - 1), b = randInt(1, a - 1);
+      return { q: `${a}/${den} - ${b}/${den} = ?/${den}. What number replaces the ?`, a: a - b };
+    },
+  T116() {
+      const den = randInt(2, 10), num = randInt(1, den - 1), k = randInt(2, 9);
+      const newNum = num * k;
+      if (newNum > 100) throw 0;
+      return { q: `${num}/${den} × ${k} = ?/${den}. What number replaces the ? (the unsimplified numerator)`, a: newNum };
+    },
+  T117() {
+      const den = choice([2, 4, 5, 10, 20, 25, 50]);
+      const num = randInt(1, den - 1);
+      const pct = (num * 100) / den;
+      if (!Number.isInteger(pct)) throw 0;
+      return { q: `Using a calculator, convert ${num}/${den} to a decimal, then multiply by 100. What do you get?`, a: pct };
+    },
+  T118() {
+      if (choice(["fracToPct", "gridToPct"]) === "fracToPct") {
+        const [num, den, pct] = choice([[1, 2, 50], [1, 4, 25], [3, 4, 75], [1, 5, 20], [1, 10, 10], [1, 1, 100]]);
+        return { q: `What percentage is equivalent to the fraction ${num}/${den}?`, a: pct };
+      }
+      const shaded = randInt(1, 100);
+      return { q: `A grid has 100 equal squares. ${shaded} are shaded. What percentage of the grid is shaded?`, a: shaded };
+    },
+  T119() {
+      const pct = choice([10, 25, 50]);
+      let amount, ans;
+      if (pct === 10) { amount = randInt(1, 10) * 10; ans = amount / 10; }
+      else if (pct === 25) { amount = randInt(1, 25) * 4; ans = amount / 4; }
+      else { amount = randInt(1, 50) * 2; ans = amount / 2; }
+      if (ans > 100) throw 0;
+      return { q: `Find ${pct}% of ${amount} (no calculator).`, a: ans };
+    },
   };
 
   if (typeof module !== "undefined") module.exports = { GENERATORS };

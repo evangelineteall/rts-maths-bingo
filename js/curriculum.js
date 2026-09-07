@@ -1333,6 +1333,52 @@ const CURRICULUM = [
       { name: "Equations of circles and tangents", code: "U567", prereqs: ["Graphs of reciprocal functions"] },
     ],
   },
+
+  // ---------------------------------------------------------------- Transition (foundation/bridging group)
+  {
+    year: "Transition", strand: "Number", topic: "Term 1",
+    subtopics: [
+      { name: "Using number lines", code: "M763", prereqs: [] },
+      { name: "Integer place value", code: "M704", prereqs: [] },
+      { name: "Decimal value", code: "T101", prereqs: ["Integer place value"] },
+      { name: "Ordering negative numbers", code: "M527", prereqs: [] },
+      { name: "Addition of integers", code: "T102", prereqs: [] },
+      { name: "Adding decimals", code: "M429", prereqs: ["Addition of integers"] },
+      { name: "Subtraction of integers", code: "T103", prereqs: ["Addition of integers"] },
+      { name: "Subtraction of decimals", code: "T104", prereqs: ["Subtraction of integers"] },
+      { name: "Multiply and divide by powers of 10", code: "T105", prereqs: ["Integer place value"] },
+      { name: "Multiplication and division of integers", code: "T106", prereqs: [] },
+      { name: "Multiplication and division of decimals", code: "T107", prereqs: ["Multiplication and division of integers"] },
+      { name: "Adding and subtracting negative numbers", code: "T108", prereqs: ["Ordering negative numbers"] },
+      { name: "Multiplying and dividing negative numbers", code: "T109", prereqs: ["Multiplication and division of integers"] },
+      { name: "Calculating with roots and powers", code: "M135", prereqs: ["Multiplication and division of integers"] },
+      { name: "Carrying out the order of operations", code: "T110", prereqs: ["Multiplication and division of integers"] },
+      { name: "Financial maths", code: "T111", prereqs: ["Multiplication and division of integers"] },
+    ],
+  },
+  {
+    year: "Transition", strand: "Algebraic Notation", topic: "Term 1",
+    subtopics: [
+      { name: "Algebraic terminology", code: "M830", prereqs: [] },
+      { name: "Collecting like terms", code: "M795", prereqs: ["Algebraic terminology"] },
+      { name: "Simplifying expressions", code: "M949", prereqs: ["Collecting like terms"] },
+      { name: "Substitution", code: "M208", prereqs: ["Algebraic terminology"] },
+      { name: "Function machines", code: "T112", prereqs: ["Multiplication and division of integers"] },
+      { name: "Finding the unknown", code: "T113", prereqs: ["Substitution"] },
+    ],
+  },
+  {
+    year: "Transition", strand: "Fractions, decimals, percentages", topic: "Term 1",
+    subtopics: [
+      { name: "Representing fractions", code: "T114", prereqs: [] },
+      { name: "Fractions of amounts", code: "M695", prereqs: ["Representing fractions"] },
+      { name: "Adding and subtracting fractions (same denominator)", code: "T115", prereqs: ["Representing fractions"] },
+      { name: "Multiplying fractions and integers", code: "T116", prereqs: ["Fractions of amounts"] },
+      { name: "Converting fractions to decimals", code: "T117", prereqs: ["Representing fractions"] },
+      { name: "Understanding percentages", code: "T118", prereqs: ["Converting fractions to decimals"] },
+      { name: "Percentages of amounts (10%, 25%, 50%)", code: "T119", prereqs: ["Understanding percentages"] },
+    ],
+  },
 ];
 
 if (typeof module !== "undefined") module.exports = { CURRICULUM };

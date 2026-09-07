@@ -6,7 +6,7 @@
  */
 
 (function () {
-  const YEAR_ORDER = ["Y7", "Y8", "Y9", "Y10", "Y11"];
+  const YEAR_ORDER = ["Transition", "Y7", "Y8", "Y9", "Y10", "Y11"];
   const CODE_INFO = {}; // code -> { name, strand, topic, year }
   for (const entry of CURRICULUM) {
     for (const st of entry.subtopics) {
