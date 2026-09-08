@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RTS Maths: Countdown Targets</title>
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <img src="img/rts-logo.png" alt="Ralph Thoresby School crest" class="header-logo" />
+    <h1>Countdown Targets</h1>
+    <nav class="mode-nav">
+      <a href="index.html">Maths Bingo</a>
+      <span class="mode-nav-sep">·</span>
+      <a href="asn.html">Always, Sometimes, Never</a>
+      <span class="mode-nav-sep">·</span>
+      <span class="mode-nav-current">Countdown Targets</span>
+    </nav>
+  </header>
+
+  <!-- ============================= SETUP SCREEN ============================= -->
+  <main id="screen-setup" class="screen">
+    <section class="instructions">
+      <h2>How this works</h2>
+      <p>
+        A target number and a set of numbers appear on the board. Students use
+        <strong>+, −, ×, ÷</strong> to try to reach the target — they don't have to use every
+        number, and each number can only be used once. Give them a minute or two, then press
+        <strong>Reveal</strong> to show one worked route to the target.
+      </p>
+    </section>
+
+    <section id="level-picker" class="setup-picker">
+      <div id="level-grid" class="level-grid"></div>
+    </section>
+
+    <section class="start-row">
+      <div id="selection-summary" class="selection-summary">No year group selected yet.</div>
+      <button type="button" id="start-game-btn" class="btn btn-primary" disabled>Start</button>
+    </section>
+  </main>
+
+  <!-- ============================= CALLER SCREEN ============================= -->
+  <main id="screen-caller" class="screen" hidden>
+    <div class="countdown-layout">
+      <div class="progress-line">
+        <span id="progress-text">Puzzle 1</span>
+        <button type="button" id="end-game-btn" class="btn btn-link">End</button>
+      </div>
+
+      <div class="target-card">
+        <span class="target-label">Target</span>
+        <span id="target-number" class="target-number">–</span>
+      </div>
+
+      <div id="numbers-row" class="numbers-row"></div>
+
+      <div id="reveal-area" class="reveal-area" hidden>
+        <div id="solution-steps" class="solution-steps"></div>
+      </div>
+
+      <div class="caller-buttons">
+        <button type="button" id="reveal-btn" class="btn btn-primary btn-large">Reveal a route</button>
+        <button type="button" id="next-btn" class="btn btn-primary btn-large" hidden>Next puzzle →</button>
+        <button type="button" id="skip-btn" class="btn btn-secondary">Skip this one</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================= SUMMARY SCREEN ============================= -->
+  <main id="screen-summary" class="screen" hidden>
+    <h2>Session summary</h2>
+    <p id="summary-line"></p>
+    <div class="summary-buttons">
+      <button type="button" id="play-again-btn" class="btn btn-primary">Play again (same year group)</button>
+      <button type="button" id="new-game-btn" class="btn btn-secondary">Choose a new year group</button>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>Ralph Thoresby School · "Ambition and Achievement for All"</p>
+  </footer>
+
+  <script src="js/countdown-app.js"></script>
+</body>
+</html>
