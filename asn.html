@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RTS Maths: Always, Sometimes, Never</title>
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <img src="img/rts-logo.png" alt="Ralph Thoresby School crest" class="header-logo" />
+    <h1>Always, Sometimes, Never</h1>
+    <nav class="mode-nav">
+      <a href="index.html">Maths Bingo</a>
+      <span class="mode-nav-sep">·</span>
+      <span class="mode-nav-current">Always, Sometimes, Never</span>
+      <span class="mode-nav-sep">·</span>
+      <a href="countdown.html">Countdown Targets</a>
+    </nav>
+  </header>
+
+  <!-- ============================= SETUP SCREEN ============================= -->
+  <main id="screen-setup" class="screen">
+    <section class="instructions">
+      <h2>How this works</h2>
+      <p>
+        Put a statement on the board. Students discuss (or write on whiteboards) whether it's
+        <strong>Always</strong>, <strong>Sometimes</strong>, or <strong>Never</strong> true — and why.
+        Pick a year group and/or strand below, press <strong>Start</strong>, then reveal the
+        answer and explanation once the class has decided.
+      </p>
+    </section>
+
+    <section class="controls-row">
+      <input type="text" id="topic-search" placeholder="Search statements… (e.g. 'fraction', 'angle')" />
+      <div class="controls-buttons">
+        <button type="button" id="select-none-btn" class="btn btn-secondary">Clear selection</button>
+      </div>
+    </section>
+
+    <section id="topic-picker" class="topic-picker"></section>
+
+    <section class="start-row">
+      <div id="selection-summary" class="selection-summary">No filter selected — all statements included.</div>
+      <button type="button" id="start-game-btn" class="btn btn-primary">Start</button>
+    </section>
+  </main>
+
+  <!-- ============================= CALLER SCREEN ============================= -->
+  <main id="screen-caller" class="screen" hidden>
+    <div class="asn-layout">
+      <section class="caller-main">
+        <div class="progress-line">
+          <span id="progress-text">Statement 1 of 1</span>
+          <button type="button" id="end-game-btn" class="btn btn-link">End</button>
+        </div>
+
+        <div id="question-card" class="question-card asn-statement-card">
+          <p id="question-text">Loading…</p>
+        </div>
+
+        <div id="reveal-area" class="reveal-area asn-reveal-area" hidden>
+          <span id="reveal-number" class="verdict-badge">–</span>
+          <p id="reveal-explanation" class="reveal-explanation"></p>
+        </div>
+
+        <div class="caller-buttons">
+          <button type="button" id="reveal-btn" class="btn btn-primary btn-large">Reveal answer</button>
+          <button type="button" id="next-btn" class="btn btn-primary btn-large" hidden>Next statement →</button>
+          <button type="button" id="skip-btn" class="btn btn-secondary">Skip this one</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ============================= SUMMARY SCREEN ============================= -->
+  <main id="screen-summary" class="screen" hidden>
+    <h2>Session summary</h2>
+    <p id="summary-line"></p>
+    <div class="summary-buttons">
+      <button type="button" id="play-again-btn" class="btn btn-primary">Play again (same filter)</button>
+      <button type="button" id="new-game-btn" class="btn btn-secondary">Choose a new filter</button>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>Ralph Thoresby School · "Ambition and Achievement for All"</p>
+  </footer>
+
+  <script src="js/asn-data.js"></script>
+  <script src="js/asn-app.js"></script>
+</body>
+</html>
