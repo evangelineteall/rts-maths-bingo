@@ -36,9 +36,9 @@
       usedMin: 3, usedMax: 5, targetMin: 100, targetMax: 500,
     },
     Y10: {
-      label: "Y10", numbersCount: 6, bigMin: 1, bigMax: 3,
+      label: "Y10", numbersCount: 6, bigMin: 2, bigMax: 3,
       ops: ["+", "-", "×", "÷"],
-      usedMin: 3, usedMax: 5, targetMin: 101, targetMax: 999,
+      usedMin: 4, usedMax: 6, targetMin: 101, targetMax: 999,
     },
     Y11: {
       label: "Y11", numbersCount: 6, bigMin: 0, bigMax: 4,
